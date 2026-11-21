@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Invoicing Tool — Zack's Playbook</title>
+<style>
+:root{--ink:#0f1b2d;--ink2:#52627a;--line:#e4e9f0;--navy:#12355b;--teal:#1f8a7a;--amber:#b4791a;
+ --amberbg:#fdf6e8;--green:#1f8a4c;--greenbg:#eef7f0;--bg:#f6f8fb;--chip:#eef2f7}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:var(--navy);color:#fff;padding:22px 32px}
+header .logo{width:30px;height:30px;border:2px solid #fff;border-radius:6px;display:inline-grid;place-items:center;font-weight:800;transform:skewX(-8deg);vertical-align:middle;margin-right:10px}
+header h1{display:inline;font-size:20px;font-weight:650;vertical-align:middle}
+header p{margin:10px 0 0;opacity:.8;font-size:14px}
+main{max-width:860px;margin:0 auto;padding:26px}
+section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-bottom:18px}
+h2{font-size:17px;margin:0 0 4px;color:var(--navy)}
+h2 .num{display:inline-grid;place-items:center;width:26px;height:26px;background:var(--teal);color:#fff;border-radius:7px;font-size:14px;margin-right:9px;vertical-align:middle}
+.sub{color:var(--ink2);font-size:13px;margin:0 0 14px}
+ol,ul{margin:10px 0 0;padding-left:22px}
+li{margin:7px 0}
+.step{counter-reset:none}
+.k{font-weight:650}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--chip);color:#41526a;margin-left:6px}
+.call{border-left:4px solid var(--teal);background:#f3faf8;padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0;font-size:14px}
+.call.warn{border-color:var(--amber);background:var(--amberbg)}
+.call b{color:var(--navy)}
+.ph{background:#fff4d6;border:1px dashed #d9b24a;border-radius:6px;padding:1px 8px;font-weight:600;color:#8a6410}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
+th{text-align:left;background:#f3f6fa;padding:9px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--ink2);border-bottom:1px solid var(--line)}
+td{padding:9px 12px;border-bottom:1px solid #f0f3f7;vertical-align:top}
+.pill{font-weight:700;font-size:12px;color:var(--amber)}
+footer{color:var(--ink2);font-size:12px;text-align:center;padding:10px 0 30px}
+@media print{body{background:#fff}section{break-inside:avoid;border-color:#ccc}}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">N</span><h1>Northern Scientific — Invoicing Tool</h1>
+  <p>Zack's playbook · turn the login sheet + COCs into validated QuickBooks invoices, in minutes</p>
+</header>
+<main>
+
+  <div class="call"><b>What this tool does.</b> It reads your Login sheet, prices every sample from the
+  Customer Pricing sheet, groups them into <b>one invoice per COC</b>, flags anything it isn't sure about,
+  and hands you a <b>QuickBooks import file</b>. It replaces the manual login-sheet → pricing → tracker
+  cross-referencing. Everything runs in your browser — <b>nothing you load leaves your PC.</b></div>
+
+  <section>
+    <h2><span class="num">1</span>One-time setup <span class="tag">~10 min, do once</span></h2>
+    <p class="sub">A. Open the portal &nbsp;·&nbsp; B. Connect OneDrive so you never upload files manually.</p>
+    <p class="k">A · Open &amp; bookmark the portal</p>
+    <ol>
+      <li>In <b>Edge</b> or <b>Chrome</b>, go to <span class="ph">[ PORTAL LINK — Chris will send ]</span> and bookmark it.</li>
+      <li>If a sign-in is shown, log in with the details Chris sends you:
+        <span class="ph">User: [ username ]</span> &nbsp; <span class="ph">Password: [ sent separately ]</span>.</li>
+    </ol>
+    <p class="k" style="margin-top:14px">B · Connect your OneDrive folder (so files sync automatically)</p>
+    <ol>
+      <li>In <b>SharePoint</b>, open the <b>Invoicing</b> document library (the one with the Login sheet,
+          Pricing sheet, and the monthly COC folders).</li>
+      <li>Click <b>Sync</b> in the top toolbar and allow OneDrive to open. The Invoicing folder now appears in
+          <b>File Explorer → OneDrive → …Invoicing</b> and updates itself whenever SharePoint changes.</li>
+      <li>Back in the portal, click <b>“Connect OneDrive folder”</b>, pick that Invoicing folder, and click
+          <b>Allow</b>. You only do this once — the portal remembers it.</li>
+    </ol>
+    <div class="call"><b>Why this matters:</b> once connected, you never download or upload anything. The tool
+    reads whatever SharePoint has synced down. (Manual drag-and-drop is still there as a backup for any week.)</div>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span>Your weekly run <span class="tag">~10 min</span></h2>
+    <ol>
+      <li>Make sure the week's <b>COCs</b> are filed in the Invoicing folder and the <b>Login sheet</b> is
+          up to date (they sync to OneDrive automatically).</li>
+      <li>Open the portal → click <b>“Refresh from OneDrive.”</b> &nbsp;<span style="color:var(--ink2)">(Or drag the
+          files in manually — backup method.)</span></li>
+      <li>The tool prices every sample, builds <b>one invoice per COC</b>, and shows two lists:
+          <b>Auto-priced</b> ✅ and <b>Needs review</b> ⚠.</li>
+      <li>Work through the <b>Needs review</b> list (see §3). Usually a handful of items.</li>
+      <li>Click <b>Download QuickBooks file</b> (and <b>Download tracker</b> for your records).</li>
+      <li>In <b>QuickBooks Online</b>: <b>Settings ⚙ → Import data → Invoices → upload the file → map columns →
+          Import.</b></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span>Clearing “Needs review”</h2>
+    <p class="sub">The tool never guesses silently — if it isn't sure, it flags it for you. What each flag means:</p>
+    <table>
+      <thead><tr><th>Flag</th><th>What it means / what to do</th></tr></thead>
+      <tbody>
+        <tr><td class="pill">no price / new client</td><td>That client or test isn't in the Pricing sheet. Add their row/price to the Pricing sheet, then Refresh.</td></tr>
+        <tr><td class="pill">price differs</td><td>The tool's sheet-based price differs from an old manual amount. The <b>Pricing sheet wins</b> — confirm and move on.</td></tr>
+        <tr><td class="pill">package uncertain</td><td>e.g. a concentrate ordered without terps. Check the price; if a “without-terps” rate is needed, add it to the Pricing sheet note.</td></tr>
+        <tr><td class="pill">no COC</td><td>A logged sample has no matching COC file — confirm it was submitted/scanned. <b>Retests (-2 / -3) are expected to have no COC</b> and won't be flagged.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="num">4</span>What you maintain — and what you don't</h2>
+    <ul>
+      <li><b>✍ Keep current — the Pricing sheet.</b> Add a row for any brand-new client, and update prices and the
+          package “includes / without” notes when they change. <b>The tool is only as accurate as this sheet.</b></li>
+      <li><b>✅ Leave alone — the Login sheet.</b> Keep logging samples exactly as you do now. The tool reads it as-is —
+          it handles messy client-name spellings and figures out COCs from the file names. No clean-up needed.</li>
+      <li><b>🗑 Stop doing by hand — the invoice tracker.</b> The tool generates the updated tracker for you.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">5</span>Rules to remember</h2>
+    <ul>
+      <li><b>The Pricing sheet is the bible.</b> If a number looks wrong, fix the <i>sheet</i>, not the invoice, then Refresh.</li>
+      <li><b>Rush</b> (set in the <b>TAT</b> column, e.g. <i>Rush C</i>, <i>Rush All</i>) adds <b>+50%</b> of the rushed test's price.</li>
+      <li><b>Retests</b> (sample IDs ending <b>-2 / -3</b>) have no COC — that's normal.</li>
+      <li><b>Invoices = one per COC.</b> Samples are billed on submission.</li>
+      <li><b>Privacy:</b> everything runs in your browser; no client data is uploaded anywhere.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">6</span>If something goes wrong</h2>
+    <ul>
+      <li><b>Portal won't load / looks blank:</b> refresh the page; use Edge or Chrome (not Internet Explorer).</li>
+      <li><b>“Refresh from OneDrive” is greyed out:</b> reconnect the folder (§1-B).</li>
+      <li><b>A client shows “unresolved”:</b> their name is brand-new — add them to the Pricing sheet.</li>
+      <li><b>Anything else:</b> message Chris.</li>
+    </ul>
+  </section>
+
+  <footer>Northern Scientific — temporary invoicing tool · bridges to the full QMS · questions → Chris</footer>
+</main>
+</body>
+</html>
